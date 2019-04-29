@@ -5,3 +5,12 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1Ijoic2VyZ2lvZ2FyY2lhcmV0ZWd1aSIsImEiOiJjanYwdXg1bmYxbXB6M3lzZG5xazYwZnd2In0.VQS4bmrDF7yKJqqALbcc5A' //esta clave de acceso se obtiene desde la pagina de Leaflet de manera gratuita
 }).addTo(mymap);
+var popup = L.popup(); // creo un popup para mostrar en pantalla un mensaje con el punto geografico seleccionado
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("El lugar a denunciar se ubica en el punto " + e.latlng.toString())
+        .openOn(mymap);
+        console.log(e.latlng);// muestro por consola un json con los datos de latitud y longitud, a futuro estos datos son los que guardaremos en la base de datos
+}
+mymap.on('click', onMapClick); // capturo el evento click sobre el mapa e invoco al metodo que muestra el popup
