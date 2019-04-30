@@ -7,7 +7,7 @@
             $this->model = new DenunciaModel();
         }
         function test(){
-            $response = $this->model->postDenuncia(30, 42, "testmail@mail.com", 0, "just testing");
+            $response = $this->model->postDenuncia(30, 42, "testmail@mail.com", 0, "just testingx2");
             echo $response;
         }
     }
