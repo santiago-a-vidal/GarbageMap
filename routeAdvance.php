@@ -2,7 +2,7 @@
 
 require_once "config/ConfigApp.php";
 require_once "controller/DenunciaController.php";
-
+define('HOME', 'Location: http://'.$_SERVER["SERVER_NAME"] .":". $_SERVER['SERVER_PORT'].dirname($_SERVER["PHP_SELF"]));
 function parseURL($url)
 {
   $urlExploded = explode('/', $url);
