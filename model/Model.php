@@ -7,7 +7,7 @@
         function connect(){
             $user = 'root';
             $pass = '';
-            $dbname = 'testreloco';
+            $dbname = 'garbagemap';
             return new PDO('mysql:host=localhost;'.'dbname='.$dbname.';charset=utf8', $user, $pass);
         }
     }
