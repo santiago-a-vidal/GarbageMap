@@ -13,7 +13,9 @@
             if($_POST['descripcion']){
                 $descripcion = $_POST['descripcion'];
             }
-            $response = $this->model->postDenuncia($_POST['latitud'], $_POST['longitud'], $_POST['mail'], $_POST['estaCompletado'], $descripcion);
+            $routeImagen;
+            //aca falta el codigo para hacer el routeo de la imagen
+            $response = $this->model->postDenuncia($_POST['latitud'], $_POST['longitud'], $_POST['mail'], $_POST['estaCompletado'], $descripcion, $routeImagen);
             $this->view->denunciaSubida($response);
         }
 
