@@ -34,7 +34,8 @@ CREATE TABLE `denuncia` (
   `longitud` decimal(10,8) NOT NULL,
   `estaCompletada` tinyint(1) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  `mail` varchar(255) NOT NULL
+  `mail` varchar(255) NOT NULL,
+  `routeImagen` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
