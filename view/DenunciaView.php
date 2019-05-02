@@ -14,7 +14,12 @@ class DenunciaView {
   }
 
   public function denunciaSubida($response){
-    echo $response;
+    if($response >= 0){
+      echo "id de denuncia: " . $response;
+    }
+    else{
+      echo "algo salio mal, intente de nuevo";
+    }
   }
 
 }

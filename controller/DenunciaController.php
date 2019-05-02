@@ -24,27 +24,14 @@
         }
 
         private function postImagen(){
-            print_r($_FILES);
-            
             $imagenReturn = null;
             $imagen = $_FILES['imagen'];
             $tipo = explode('/', $imagen['type']);
             if($tipo[0] == "image"){
                 $imagenReturn = array('tipo' => $tipo[1], 'path' => $_FILES['imagen']['tmp_name']);
             }
-            print_r($imagenReturn);
             return $imagenReturn;
-            /*
-            foreach ($_FILES['imagen']['type'] as $key => $value) {
-                $tipo = explode('/', $value);
-                if($tipo[0] == "image"){
-                    $imagenes[] = array('tipo' => $tipo[1], 'path' => $_FILES['imagen']['tmp_name'][$key]);
-                }
-            }
-            print_r($imagenes);
-            foreach($imagenes as $imagen){
-                $this->ImagenesModel->insertImagen($id_review, $imagen);
-            }*/
+            
         }
 
         function hacerDenuncia(){
