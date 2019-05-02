@@ -6,11 +6,12 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     accessToken: 'pk.eyJ1Ijoic2VyZ2lvZ2FyY2lhcmV0ZWd1aSIsImEiOiJjanYwdXg1bmYxbXB6M3lzZG5xazYwZnd2In0.VQS4bmrDF7yKJqqALbcc5A' //esta clave de acceso se obtiene desde la pagina de Leaflet de manera gratuita
 }).addTo(mymap);
 var popup = L.popup(); // creo un popup para mostrar en pantalla un mensaje con el punto geografico seleccionado
-var latitud=0;
-var longitud=0;
+
+let latitud = document.querySelector("#js-latitud");
+let longitud = document.querySelector("#js-longitud");
 function onMapClick(e) {
-  latitud=e.latlng.lat
-  longitud=e.latlng.lng
+  latitud.value = e.latlng.lat
+  longitud.value = e.latlng.lng
     popup
         .setLatLng(e.latlng)
         .setContent("El lugar a denunciar se ubica en el punto " + e.latlng.toString())
@@ -18,7 +19,7 @@ function onMapClick(e) {
         console.log(e.latlng);// muestro por consola un json con los datos de latitud y longitud, a futuro estos datos son los que guardaremos en la base de datos
 }
 mymap.on('click', onMapClick); // capturo el evento click sobre el mapa e invoco al metodo que muestra el popup
-
+/*
  $("#add_denuncia").submit(function(e){
    e.preventDefault();
    var formData = {lat:latitud,
@@ -37,3 +38,4 @@ mymap.on('click', onMapClick); // capturo el evento click sobre el mapa e invoco
       }
     });
     });
+*/

@@ -13,17 +13,19 @@
 <body>
 <header>
 </header>
-<form action="" method="POST" enctype="multipart/form-data" id="add_denuncia">
-  <div class="form-group">
-    <label>Definir ubicacion</label>
-    <div id="mapid"></div> <!-- este div contendra el mapa-->
-    <label>Descripcion</label>
-    <textarea class="form-control" name="descripcion"id="descripcion" rows="3"></textarea>
-    <label>Imagen</label>
-    <input class="form-control" type="file" name="image[]" id="image" multiple>
-  </div>
+<div id="mapid"></div> <!-- este div contendra el mapa-->
 
-  <button type="submit" class="btn btn-primary" id="submitDenuncia">Enviar</button>
+<form action="publicarDenuncia" method="post" enctype="multipart/form-data" id="add_denuncia">
+    <label>Definir ubicacion</label>
+    <input type="text" name="latitud" id="js-latitud">
+    <input type="text" name="longitud" id="js-longitud">
+    <label>Descripcion</label>
+    <textarea class="form-control" name="descripcion" id="descripcion" rows="3"></textarea>
+    <label>Imagen</label>
+    <input class="form-control" type="file" name="imagen" id="image">
+    <input type="text" name="mail" value="mail@mail.com">
+    <input name="estaCompletado" type="number" value="0">
+    <button type="submit" class="btn btn-primary" id="submitDenuncia">Enviar</button>
 </form>
 <footer>
 </footer>

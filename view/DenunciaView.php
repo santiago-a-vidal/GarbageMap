@@ -10,8 +10,11 @@ class DenunciaView {
 
   public function formularioDenuncia(){
     $this->smarty->display('denunciapage.tpl');
+
   }
-  public function denunciaSubida(){
+
+  public function denunciaSubida($response){
+    echo $response;
   }
 
 }
