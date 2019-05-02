@@ -13,13 +13,10 @@ class DenunciaView {
 
   }
 
-  public function denunciaSubida($response){
-    if($response >= 0){
-      echo "id de denuncia: " . $response;
-    }
-    else{
-      echo "algo salio mal, intente de nuevo";
-    }
+  public function denunciaSubida($response,$error = false){
+    $this->smarty->assign('response',$response);
+    $this->smarty->assign('error',$error);
+    $this->smarty->display('denunciasubida.tpl');
   }
 
 }

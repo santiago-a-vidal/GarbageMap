@@ -16,11 +16,11 @@
             $imagen = $this->postImagen();
             if($imagen){
                 $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], $_POST['estaCompletado'], $descripcion, $imagen);
-                $this->view->denunciaSubida($response);
+                $this->view->denunciaSubida($response,false);
+                die();
             }
-            else{
-                echo $imagen;
-            }
+            $response = null;
+            $this->view->denunciaSubida($response,true);
         }
 
         private function postImagen(){
@@ -37,4 +37,5 @@
         function hacerDenuncia(){
             $this->view->formularioDenuncia();
         }
+
     }
