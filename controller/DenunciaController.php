@@ -52,19 +52,38 @@
             $video = $this->postVideo();
             if($video){
                 $response = $this->model->postDenunciaInfraganti((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['dir_testigo'], $_POST['fecha'],$_POST['hora'], $video);
-                $this->enviarEmail();
+                $this->enviarEmail((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['dir_testigo'], $_POST['fecha'],$_POST['hora'], $video, $response);
                 $this->view->denunciaInfragantiSubida($response,false);
                 die();
             }
             $response = null;
             $this->view->denunciaInfragantiSubida($response,true);
         }
-        //funcion que llama a la clase EmailHelper, le carga los datos al mail y lo envia
-        private function enviarEmail(){
+        //funcion que llama a la clase EmailHelper, 
+        //le carga los datos al mail (numero de denuncia y link a la misma) y lo envia
+        private function enviarEmail($response){
             $email = new EmailHelper();
-            $email->setMensaje('denuncia subida');
-            $email->setTo('santosluciano1705@gmail.com');
-            $email->setAsunto('Nueva denuncia infraganti');
+            $email->setAsunto('Denuncia Infraganti N°'+$response);
+            $msg = '<div>
+            <h5>Denuncia Infraganti</h5>
+            <hr />
+            <dl class="row">
+                <dt class = "col-sm-2">
+                    Numero de denuncia: 
+                </dt>
+                <dd class = "col-sm-10">'
+                    +$response+
+                '</dd>
+                <dt class = "col-sm-2">
+                    Link a denuncia:
+                </dt>
+                <dd class = "col-sm-10">
+                    www.garbageMap.com/DenunciaInfraganti/'+$response+
+                '</dd>
+            </dl>
+            </div>';
+            $email->setMensaje($msg);
+            $email->setTo('santosluciano1705@gmail.com');//simula el mail de la subsecretaria
             $email->setHTML();
             $email->enviarEmail();
         }
@@ -79,3 +98,5 @@
             return $videoReturn;
         }
     }
+
+
