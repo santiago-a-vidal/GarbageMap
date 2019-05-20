@@ -1,6 +1,7 @@
 <?php
     require_once('model/DenunciaModel.php');
     require_once('view/DenunciaView.php');
+    require_once('clases/EmailHelper.php');
     class DenunciaController{
         private $model;
         private $view;
@@ -32,7 +33,6 @@
         //funcion para subir la imagen
         private function postImagen(){
             $imagenReturn = null;
-            print_r($_FILES['imagen']);
             $imagen = $_FILES['imagen'];
             $tipo = explode('/', $imagen['type']);
             if($tipo[0] == "image"){
@@ -51,7 +51,7 @@
         function publicarDenunciaInfraganti(){
             $video = $this->postVideo();
             if($video){
-                $response = $this->model->postDenunciaInfraganti();
+                $response = $this->model->postDenunciaInfraganti((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['dir_testigo'], $_POST['fecha'],$_POST['hora'], $video);
                 $this->enviarEmail();
                 $this->view->denunciaInfragantiSubida($response,false);
                 die();
