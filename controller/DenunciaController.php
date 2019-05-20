@@ -35,19 +35,19 @@
             
         }
 
-/*        function hacerDenuncia(){
+        function hacerDenuncia(){
             $this->view->formularioDenuncia();
         }
         //Muestra la vista para hacer la denuncia infraganti
         function hacerDenunciaInfraganti(){
             $this->view->formularioDenunciaInfraganti();
-        }*/
+        }
         //Se guarda la denuncia infraganti, se envia el mail a la subsecretaria y se da un feedback
-/*        function publicarDenunciaInfraganti(){
+        function publicarDenunciaInfraganti(){
             $response = $this->model->postDenunciaInfraganti();
             $this->enviarEmail();
             $this->view->denunciaInfragantiSubida($response);
-        }*/
+        }
         //funcion que llama a la clase EmailHelper, le carga los datos al mail y lo envia
         private function enviarEmail(){
             $email = new EmailHelper();
