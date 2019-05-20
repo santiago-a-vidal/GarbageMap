@@ -25,6 +25,7 @@
 
         private function postImagen(){
             $imagenReturn = null;
+            print_r($_FILES['imagen']);
             $imagen = $_FILES['imagen'];
             $tipo = explode('/', $imagen['type']);
             if($tipo[0] == "image"){
@@ -32,6 +33,16 @@
             }
             return $imagenReturn;
             
+        }
+
+        private function postVideo(){
+            $videoReturn = null;
+            $video = $_FILES['video'];
+            $tipo = explode('/', $video['type']);
+            if($tipo[0] == "video"){
+                $videoReturn = array('tipo' => $tipo[1], 'path' => $_FILES['video']['tmp_name']);
+            }
+            return $videoReturn;
         }
 
         function hacerDenuncia(){
