@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-05-2019 a las 02:01:22
+-- Servidor: localhost
+-- Tiempo de generación: 22-05-2019 a las 03:39:46
 -- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Versión de PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,6 +41,26 @@ CREATE TABLE `denuncia` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `denuncia_especial`
+--
+
+CREATE TABLE `denuncia_especial` (
+  `id_denuncia` int(11) NOT NULL,
+  `dni` int(9) NOT NULL,
+  `nombre` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `apellido` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `direccion` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `fecha` date NOT NULL,
+  `hora` time(6) NOT NULL,
+  `longitud` decimal(10,8) NOT NULL,
+  `latitud` decimal(10,8) NOT NULL,
+  `patente` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `routeVideo` varchar(255) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -62,6 +82,12 @@ ALTER TABLE `denuncia`
   ADD KEY `FK_DenunciaUsuario` (`mail`);
 
 --
+-- Indices de la tabla `denuncia_especial`
+--
+ALTER TABLE `denuncia_especial`
+  ADD PRIMARY KEY (`id_denuncia`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -75,7 +101,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `denuncia`
 --
 ALTER TABLE `denuncia`
-  MODIFY `id_denuncia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_denuncia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `denuncia_especial`
+--
+ALTER TABLE `denuncia_especial`
+  MODIFY `id_denuncia` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
