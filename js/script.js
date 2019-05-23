@@ -19,23 +19,3 @@ function onMapClick(e) {
         console.log(e.latlng);// muestro por consola un json con los datos de latitud y longitud, a futuro estos datos son los que guardaremos en la base de datos
 }
 mymap.on('click', onMapClick); // capturo el evento click sobre el mapa e invoco al metodo que muestra el popup
-/*
- $("#add_denuncia").submit(function(e){
-   e.preventDefault();
-   var formData = {lat:latitud,
-                   long:longitud,
-                  descripcion:descripcion.value}
-   console.log(formData);
-   $.ajax({
-    method: "POST",
-    url: "routeAdvance.php?action=publicarDenuncia",
-    data: formData,
-    contentType: false,
-    cache: false,
-    processData:false,
-    success: function(receivedData){
-      console.log(receivedData);
-      }
-    });
-    });
-*/
