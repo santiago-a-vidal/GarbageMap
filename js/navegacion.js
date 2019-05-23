@@ -55,13 +55,13 @@ $('#hd').on('click', function(event){
       }
   }
 
-  $('body').on("submit",'.form-infraganti', function (event) {
+  /*$('body').on("submit",'.form-infraganti', function (event) {
       event.preventDefault();  
       var form = new FormData($('.form-infraganti')[0]);  
       let link = 'publicarDenunciaInfraganti';    
       $('.btn-denunciar').attr("disabled",true);
       $('.btn-denunciar').html('<i class="fas fa-circle-notch fa-spin"></i>');
       callPostAjax(link, form);
-  })
+  })*/
 
 });

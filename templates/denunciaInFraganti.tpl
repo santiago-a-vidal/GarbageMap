@@ -4,15 +4,15 @@
     <div class="row">
     <div class="col-md-6">
     <div id="mapid"></div>
-    <div class="col-lg-6">
-    <input type="text" name="latitud" id="js-latitud">
-    </div>
-    <div class="col-lg-6">
-    <input type="text" name="longitud" id="js-longitud">
-    </div>
     </div>
     <div class="col-md-6">
     <form action="publicarDenunciaInfraganti" class="form-infraganti" method="post" enctype="multipart/form-data">
+        <div class="col-lg-6">
+        <input type="text" name="latitud" id="js-latitud">
+        </div>
+        <div class="col-lg-6">
+        <input type="text" name="longitud" id="js-longitud">
+        </div>
         <div class="form-group">
           <label for="video">Video de la situacion</label>
           <input type="file" class="form-control-file" name="video" id="video">

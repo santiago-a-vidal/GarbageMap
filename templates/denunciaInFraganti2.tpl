@@ -1,17 +1,19 @@
   <h1>HACÉ TU DENUNCIA ONLINE</h1>
+    <div class="form-group">
+        <span for="input_ubicacion" class="col-sm-2 col-form-label">Marcá la ubicación de la basura </span>
+    </div>
+    <div id="mapid">
+    </div> <!-- este div contendra el mapa-->
     <form action="publicarDenunciaInfraganti" method="post" enctype="multipart/form-data" id="add_denuncia_infraganti">
 
 
-      <div class="form-group">
-        <span for="input_ubicacion" class="col-sm-2 col-form-label">Marcá la ubicación de la basura </span>
-      </div>
-      <div id="mapid"></div> <!-- este div contendra el mapa-->
+      
       <div class= "form-group row">
           <div class="col-sm-10">
-          <input type="text" class="form-control" name="latitud" id="js-latitud"placeholder="Latitud">
-          <input type="text" class="form-control"name="longitud" id="js-longitud"placeholder="Longitud">
-     </div>
-   </div>
+            <input type="text" class="form-control" name="latitud" id="js-latitud" placeholder="Latitud">
+            <input type="text" class="form-control" name="longitud" id="js-longitud"placeholder="Longitud">
+          </div>
+      </div>
      <div class="form-group row">
        <span>Datos del denunciante</span>
      </div>
