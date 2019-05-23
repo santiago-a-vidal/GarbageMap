@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>GarbageMap</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="main.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="css/leaflet.css"> <!-- Llamado a la biblioteca de estilos de la api Leaflet (Aplicacion de mapas Free)-->
+<link rel="stylesheet" href="css/estilo.css"><!-- Llamado a la biblioteca de estilos personal en donde le daremos tamaño al mapa que se mostrara-->
+
     <div id="mapid"></div>
     <form action="publicarDenunciaInfraganti" method="post" enctype="multipart/form-data">
         <input type="text" name="latitud" id="js-latitud">
@@ -25,7 +17,7 @@
             <label for="dni">DNI</label>
             <input type="number" class="form-control" id="dni" name="dni" placeholder="dni">
         </div>
-        
+
         <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre">
@@ -49,7 +41,5 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <script src="js/jquery-3.0.0.min.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de bootstrap-->
-<script src="js/leaflet.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de Leaflet (Mapas Free)-->
-<script src="js/script.js" charset="utf-8"></script> <!-- Llamado a  javascript que contendra la funcionalidad del mapa-->
-</body>
-</html>
+    <script src="js/leaflet.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de Leaflet (Mapas Free)-->
+    <script src="js/script.js" charset="utf-8"></script> <!-- Llamado a  javascript que contendra la funcionalidad del mapa-->
