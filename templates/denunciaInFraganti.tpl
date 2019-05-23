@@ -1,8 +1,7 @@
 <link rel="stylesheet" href="css/leaflet.css"> <!-- Llamado a la biblioteca de estilos de la api Leaflet (Aplicacion de mapas Free)-->
 <link rel="stylesheet" href="css/estilo.css"><!-- Llamado a la biblioteca de estilos personal en donde le daremos tamaño al mapa que se mostrara-->
-
     <div id="mapid"></div>
-    <form action="publicarDenunciaInfraganti" method="post" enctype="multipart/form-data">
+    <form action="publicarDenunciaInfraganti" class="form-infraganti" method="post" enctype="multipart/form-data">
         <input type="text" name="latitud" id="js-latitud">
         <input type="text" name="longitud" id="js-longitud">
         <div class="form-group">
@@ -11,7 +10,7 @@
         </div>
         <div class="form-group">
             <label for="patente">patente</label>
-            <input type="text" class="form-control" id="patente" name="patente" placeholder="dni">
+            <input type="text" class="form-control" id="patente" name="patente" placeholder="patente">
         </div>
         <div class="form-group">
             <label for="dni">DNI</label>

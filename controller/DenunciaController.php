@@ -55,38 +55,40 @@
             $video = $this->postVideo();
             if($video){
                 $response = $this->modelInFraganti->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['fecha'],$_POST['hora'], $video, $_POST['patente']);
-                $this->enviarEmail((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['fecha'],$_POST['hora'], $video, $response);
-                $this->view->denunciaInfragantiSubida($response,false);
+                $this->enviarEmail($response);
+                $respuesta['success'] = true;
+                $respuesta['id'] = $response;
+                return json_encode($respuesta);
                 die();
             }
-            $response = null;
-            $this->view->denunciaInfragantiSubida($response,true);
+            $respuesta['success'] = false;
+            return json_encode($respuesta);
         }
         //funcion que llama a la clase EmailHelper, 
         //le carga los datos al mail (numero de denuncia y link a la misma) y lo envia
         private function enviarEmail($response){
             $email = new EmailHelper();
-            $email->setAsunto('Denuncia Infraganti N°'+$response);
-            $msg = '<div>
+            $email->setAsunto("Denuncia Infraganti N°$response");
+            $msg = "<div>
             <h5>Denuncia Infraganti</h5>
             <hr />
-            <dl class="row">
-                <dt class = "col-sm-2">
+            <dl class='row'>
+                <dt class = 'col-sm-2'>
                     Numero de denuncia: 
                 </dt>
-                <dd class = "col-sm-10">'
-                    +$response+
-                '</dd>
-                <dt class = "col-sm-2">
+                <dd class = 'col-sm-10'>
+                    $response
+                </dd>
+                <dt class = 'col-sm-2'>
                     Link a denuncia:
                 </dt>
-                <dd class = "col-sm-10">
-                    www.garbageMap.com/DenunciaInfraganti/'+$response+
-                '</dd>
+                <dd class = 'col-sm-10'>
+                    www.garbageMap.com/DenunciaInfraganti/'$response
+                </dd>
             </dl>
-            </div>';
+            </div>";
             $email->setMensaje($msg);
-            $email->setTo('siromaniejko@gmail.com');//simula el mail de la subsecretaria
+            $email->setTo('santosluciano1705@gmail.com');//simula el mail de la subsecretaria
             $email->setHTML();
             $email->enviarEmail();
         }
