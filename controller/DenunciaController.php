@@ -2,11 +2,14 @@
     require_once('model/DenunciaModel.php');
     require_once('view/DenunciaView.php');
     require_once('clases/EmailHelper.php');
+    require_once('model/DenunciaInFragantiModel.php');
     class DenunciaController{
         private $model;
+        private $modelInFraganti;
         private $view;
         function __construct() {
             $this->model = new DenunciaModel();
+            $this->modelInFraganti = new DenunciaInFragantiModel();
             $this->view = new DenunciaView();
         }
 
@@ -51,8 +54,8 @@
         function publicarDenunciaInfraganti(){
             $video = $this->postVideo();
             if($video){
-                $response = $this->model->postDenunciaInfraganti((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['dir_testigo'], $_POST['fecha'],$_POST['hora'], $video);
-                $this->enviarEmail((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['dir_testigo'], $_POST['fecha'],$_POST['hora'], $video, $response);
+                $response = $this->modelInFraganti->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['fecha'],$_POST['hora'], $video, $_POST['patente']);
+                $this->enviarEmail((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['fecha'],$_POST['hora'], $video, $response);
                 $this->view->denunciaInfragantiSubida($response,false);
                 die();
             }
@@ -83,19 +86,28 @@
             </dl>
             </div>';
             $email->setMensaje($msg);
-            $email->setTo('santosluciano1705@gmail.com');//simula el mail de la subsecretaria
+            $email->setTo('siromaniejko@gmail.com');//simula el mail de la subsecretaria
             $email->setHTML();
             $email->enviarEmail();
         }
 
         private function postVideo(){
             $videoReturn = null;
+            print_r($_FILES);
             $video = $_FILES['video'];
             $tipo = explode('/', $video['type']);
             if($tipo[0] == "video"){
                 $videoReturn = array('tipo' => $tipo[1], 'path' => $_FILES['video']['tmp_name']);
             }
             return $videoReturn;
+        }
+
+        function testeoModel(){
+            $this->modelInFraganti->postDenuncia(5, 7, 444, "pablo", "rodrigez", "gral-233", "2000-12-12", "23:00", "dadada");
+        }
+
+        function testForm(){
+            $this->view->testForm();
         }
     }
 

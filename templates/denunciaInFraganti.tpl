@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="mapid"></div>
-    <form>
+    <form action="publicarDenunciaInfraganti" method="post" enctype="multipart/form-data">
         <input type="text" name="latitud" id="js-latitud">
         <input type="text" name="longitud" id="js-longitud">
         <div class="form-group">
@@ -18,9 +18,14 @@
           <input type="file" class="form-control-file" name="video" id="video">
         </div>
         <div class="form-group">
+            <label for="patente">patente</label>
+            <input type="text" class="form-control" id="patente" name="patente" placeholder="dni">
+        </div>
+        <div class="form-group">
             <label for="dni">DNI</label>
             <input type="number" class="form-control" id="dni" name="dni" placeholder="dni">
         </div>
+        
         <div class="form-group">
           <label for="nombre">Nombre</label>
           <input type="text" class="form-control" name="nombre" id="nombre" placeholder="nombre">
@@ -38,8 +43,9 @@
         </div>
         <div class="form-group">
           <label for="hora">Hora</label>
-          <input number="hora" class="form-control" id="hora" name="hora" placeholder="0" min="0" max= 23>
+          <input type="time" class="form-control" id="hora" name="hora" >
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <script src="js/jquery-3.0.0.min.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de bootstrap-->

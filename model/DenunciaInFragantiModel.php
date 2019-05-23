@@ -1,13 +1,14 @@
 <?php
     require_once 'Model.php';
 
-    class DenunciaModel extends Model{
+    class DenunciaInFragantiModel extends Model{
         
-        function postDenuncia($latitud, $longitud, $dni, $nombre, $apellido, $dir_testigo, $fecha, $hora, $video){
-            $destino_final = 'videos/' . uniqid() . '.'. $imagen['tipo'];
-            move_uploaded_file($imagen['path'], $destino_final);
-            $sentencia = $this->db->prepare("INSERT INTO denuncia_in_fraganti(latitud, longitud, dni, nombre, apellido, dir_testigo, fecha, hora, route_video) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            if($sentencia->execute(array($latitud, $longitud, $dni, $nombre, $apellido, $dir_testigo, $fecha, $hora, $destino_final))){
+        function postDenuncia($latitud, $longitud, $dni, $nombre, $apellido, $direccion, $fecha, $hora, $video, $patente){
+            $destino_final = 'videos/' . uniqid() . '.'. $video['tipo'];
+            move_uploaded_file($video['path'], $destino_final);
+            $sentencia = $this->db->prepare("INSERT INTO denuncia_especial (dni, nombre, apellido, direccion, fecha, hora, longitud, latitud, patente, routeVideo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            //                              dni, nombre, apellido, direccion, fecha, hora, longitud, latitud, patente, routeVideo
+            if($sentencia->execute(array($dni, $nombre, $apellido, $direccion, $fecha, $hora, $longitud, $latitud, $patente, $destino_final))){
                 return $this->db->lastInsertId();
             }
             else{

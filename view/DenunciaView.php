@@ -18,6 +18,9 @@ class DenunciaView {
     $this->smarty->display('denunciasubida.tpl');
   }
 
+  function testForm(){
+    $this->smarty->display('denunciaInFraganti.tpl');
+  }
 }
 
 
