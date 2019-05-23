@@ -101,14 +101,6 @@
             }
             return $videoReturn;
         }
-
-        function testeoModel(){
-            $this->modelInFraganti->postDenuncia(5, 7, 444, "pablo", "rodrigez", "gral-233", "2000-12-12", "23:00", "dadada");
-        }
-
-        function testForm(){
-            $this->view->testForm();
-        }
     }
 
 
