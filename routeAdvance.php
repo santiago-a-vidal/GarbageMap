@@ -2,6 +2,8 @@
 
 require_once "config/ConfigApp.php";
 require_once "controller/DenunciaController.php";
+require_once "controller/Controller.php";
+
 define('HOME', 'Location: http://'.$_SERVER["SERVER_NAME"] .":". $_SERVER['SERVER_PORT'].dirname($_SERVER["PHP_SELF"]));
 function parseURL($url)
 {
