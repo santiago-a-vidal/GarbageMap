@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/leaflet.css"> <!-- Llamado a la biblioteca de estilos de la api Leaflet (Aplicacion de mapas Free)-->
 <link rel="stylesheet" href="css/estilo.css"><!-- Llamado a la biblioteca de estilos personal en donde le daremos tamaño al mapa que se mostrara-->
-
+<div class="container">
 <div id="mapid" ></div> <!-- este div contendra el mapa-->
 <form action="publicarDenuncia" method="post" enctype="multipart/form-data" id="add_denuncia">
     <div class="form-group">
@@ -25,6 +25,7 @@
     </div>
     <button type="submit" class="btn btn-primary" id="submitDenuncia">Enviar</button>
 </form>
+</div>
 <script src="js/jquery-3.0.0.min.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de bootstrap-->
 <script src="js/leaflet.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de Leaflet (Mapas Free)-->
 <script src="js/script.js" charset="utf-8"></script> <!-- Llamado a  javascript que contendra la funcionalidad del mapa-->

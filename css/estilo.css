@@ -1,28 +1,14 @@
 #mapid { height: 400px; }/*tamaño del mapa */
-.inicio{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 
 body{
   font-family: sans-serif;
-  width: 600px;
-  padding: 10px;
   background-color: rgb(240, 240, 240);
   margin: 0;
-}
-
-div{
-  max-width: 500px;
-  margin: auto;
 }
 /* estilo de los div con class container*/
 .container {
   border-radius: 5px;
   background-color: #f2f2f2;
-  padding: 20px;
 }
 /* Estilo de los inputs, los select y los textarea */
 input, select, textarea{
@@ -38,7 +24,7 @@ input, select, textarea{
 /* estilo de los labels del formulario*/
 label {
   font-size:14px;
-  padding: 20px 20px 20px 20px;
+  padding: 10px 10px 10px 20px;
   display: inline-block;
 }
 
