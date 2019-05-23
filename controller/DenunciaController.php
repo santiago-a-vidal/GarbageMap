@@ -57,6 +57,7 @@
                 $denuncia = $this->modelInFraganti->getDenuncia($response);
                 $respuesta['success'] = true;
                 $respuesta['id'] = $response;
+                $this->view->denunciaSubida($response);
                 $this->enviarEmail($denuncia);
                 return json_encode($respuesta);
                 die();
