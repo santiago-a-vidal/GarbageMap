@@ -1,0 +1,60 @@
+
+#mapid {
+   height: 400px;
+   width: 600px;
+   margin-top: 5px;
+   margin-bottom: 5px;
+}
+
+body{
+  font-family: sans-serif;
+  width: 600px;
+  padding: 10px;
+  background-color: rgb(240, 240, 240);
+  margin: 0;
+}
+
+div{
+  max-width: 500px;
+  margin: auto;
+}
+/* estilo de los div con class container*/
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+/* Estilo de los inputs, los select y los textarea */
+input, select, textarea{
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+/* estilo de los labels del formulario*/
+label {
+  font-size:14px;
+  padding: 20px 20px 20px 20px;
+  display: inline-block;
+}
+
+span {
+  font-size: 16px;
+  text-transform: capitalize;
+  text-decoration: underline;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 20px 20px 20px 20px;
+}
+
+/* responsive, cuando la pantalla sea menor a 600px se reagrupan las columnas */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
