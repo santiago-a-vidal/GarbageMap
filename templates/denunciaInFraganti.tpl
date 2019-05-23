@@ -37,7 +37,7 @@
           <input type="time" class="form-control" id="hora" name="hora" >
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary btn-denunciar">Denunciar</button>
     </form>
     <script src="js/jquery-3.0.0.min.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de bootstrap-->
     <script src="js/leaflet.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de Leaflet (Mapas Free)-->

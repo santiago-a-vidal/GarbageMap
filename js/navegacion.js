@@ -45,6 +45,8 @@ $('#hd').on('click', function(event){
 
   function mostrarAlerta (data, textStatus, jqXHR) {
       data = JSON.parse(data);
+      $('.btn-denunciar').attr("disabled",false);
+      $('.btn-denunciar').html('Denunciar');
       alertify.set('notifier','position', 'top-center');
       if (data.success){
         alertify.alert('Denuncia realizada', 'El numero de denuncia para su seguimiento es: '+data.id, function(){ alertify.success('Denuncia exitosa'); });
@@ -56,8 +58,9 @@ $('#hd').on('click', function(event){
   $('body').on("submit",'.form-infraganti', function (event) {
       event.preventDefault();  
       var form = new FormData($('.form-infraganti')[0]);  
-      //let form = $(this).serialize();
       let link = 'publicarDenunciaInfraganti';    
+      $('.btn-denunciar').attr("disabled",true);
+      $('.btn-denunciar').html('<i class="fas fa-circle-notch fa-spin"></i>');
       callPostAjax(link, form);
   })
 

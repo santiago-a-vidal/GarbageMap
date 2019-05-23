@@ -1,7 +1,6 @@
 <?php
     require_once('model/DenunciaModel.php');
     require_once('view/DenunciaView.php');
-    require_once('clases/EmailHelper.php');
     require_once('model/DenunciaInFragantiModel.php');
     class DenunciaController{
         private $model;
@@ -55,42 +54,111 @@
             $video = $this->postVideo();
             if($video){
                 $response = $this->modelInFraganti->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['dni'], $_POST['nombre'], $_POST['apellido'], $_POST['direccion'], $_POST['fecha'],$_POST['hora'], $video, $_POST['patente']);
-                $this->enviarEmail($response);
+                $denuncia = $this->modelInFraganti->getDenuncia($response);
                 $respuesta['success'] = true;
                 $respuesta['id'] = $response;
+                $this->enviarEmail($denuncia);
                 return json_encode($respuesta);
                 die();
             }
             $respuesta['success'] = false;
             return json_encode($respuesta);
         }
-        //funcion que llama a la clase EmailHelper, 
-        //le carga los datos al mail (numero de denuncia y link a la misma) y lo envia
-        private function enviarEmail($response){
-            $email = new EmailHelper();
-            $email->setAsunto("Denuncia Infraganti N°$response");
-            $msg = "<div>
-            <h5>Denuncia Infraganti</h5>
+        //funcion que envia mail con el video adjunto
+        private function enviarEmail($denuncia){
+            //mail que simula ser el de la secretaria
+            $to = 'santosluciano1705@gmail.com';
+            //envia el mail
+            $from = 'luchosan74@gmail.com';
+            $fromName = 'Sistema GarbageMap';
+            $id = $denuncia['id_denuncia'];
+            $dni = $denuncia['dni'];
+            $nombrecompleto = $denuncia['nombre'].' '.$denuncia['apellido'];
+            $direccion = $denuncia['direccion'];
+            $fecha = $denuncia['fecha'].' '.$denuncia['hora'];
+            $patente = $denuncia['patente'];
+            $ubicacion = $denuncia['latitud'].', '.$denuncia['longitud'];
+            //asunto del mail
+            $subject = 'Denuncia infraganti N°'.$id; 
+            
+            //video a adjuntar
+            $file = $denuncia['routeVideo'];
+            
+            //cuerpo del mail
+            $htmlContent = "<div>
+            <h3>Denuncia Infraganti</h3>
             <hr />
             <dl class='row'>
                 <dt class = 'col-sm-2'>
                     Numero de denuncia: 
                 </dt>
                 <dd class = 'col-sm-10'>
-                    $response
+                    $id
                 </dd>
                 <dt class = 'col-sm-2'>
-                    Link a denuncia:
+                    Nombre y apellido del testigo:
                 </dt>
                 <dd class = 'col-sm-10'>
-                    www.garbageMap.com/DenunciaInfraganti/'$response
+                    $nombrecompleto
+                </dd>
+                <dt class = 'col-sm-2'>
+                    DNI del testigo:
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $dni
+                </dd>
+                <dt class = 'col-sm-2'>
+                    Direccion del testigo:
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $direccion
+                </dd>
+                <dt class = 'col-sm-2'>
+                    Fecha del hecho:
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $fecha
+                </dd>
+                <dt class = 'col-sm-2'>
+                    Patente del infractor:
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $patente
+                </dd>
+                <dt class = 'col-sm-2'>
+                    Ubicacion de infraccion (latitud y longitud):
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $ubicacion
                 </dd>
             </dl>
             </div>";
-            $email->setMensaje($msg);
-            $email->setTo('santosluciano1705@gmail.com');//simula el mail de la subsecretaria
-            $email->setHTML();
-            $email->enviarEmail();
+            
+            $headers = "From: $fromName"." <".$from.">";
+            $semi_rand = md5(time()); 
+            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
+            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
+            $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
+            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n"; 
+            //adjunta el video
+            if(!empty($file) > 0){
+                if(is_file($file)){
+                    $message .= "--{$mime_boundary}\n";
+                    $fp =    fopen($file,"rb");
+                    $data =  fread($fp,filesize($file));
+            
+                    fclose($fp);
+                    $data = chunk_split(base64_encode($data));
+                    $message .= "Content-Type: application/octet-stream; name=\"".basename($file)."\"\n" . 
+                    "Content-Description: ".basename($file)."\n" .
+                    "Content-Disposition: attachment;\n" . " filename=\"".basename($file)."\"; size=".filesize($file).";\n" . 
+                    "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
+                }
+            }
+            $message .= "--{$mime_boundary}--";
+            $returnpath = "-f" . $from;
+            //envia el mail
+            mail($to, $subject, $message, $headers, $returnpath);
         }
 
         private function postVideo(){

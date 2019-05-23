@@ -1,7 +1,6 @@
 <?php
 require_once('model/Model.php');
 require_once('view/View.php');
-require_once('clases/EmailHelper.php');
 
 class Controller{
     private $model;
