@@ -18,8 +18,10 @@
         }
 
         function getDenuncia($id_denuncia){
+            
             $sentencia = $this->db->prepare("SELECT * FROM denuncia_especial WHERE id_denuncia = ?");
             $sentencia->execute(array($id_denuncia));
             return $sentencia->fetch(PDO::FETCH_ASSOC);
+            //busca una fila por la id_denuncia y la devuelve
         }
     }

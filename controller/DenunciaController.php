@@ -93,11 +93,10 @@
 
         private function postVideo(){
             $videoReturn = null;
-            print_r($_FILES);
             $video = $_FILES['video'];
-            $tipo = explode('/', $video['type']);
-            if($tipo[0] == "video"){
-                $videoReturn = array('tipo' => $tipo[1], 'path' => $_FILES['video']['tmp_name']);
+            $tipo = explode('/', $video['type']); //separa el tipo de video en tipo[0] que tipo de archivo es (video, imagen, etc) y tipo[1] la extension
+            if($tipo[0] == "video"){ //si es un video
+                $videoReturn = array('tipo' => $tipo[1], 'path' => $_FILES['video']['tmp_name']); //regresa un array con la extension y el path temporal del archivo
             }
             return $videoReturn;
         }

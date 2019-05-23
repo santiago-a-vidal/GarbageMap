@@ -9,7 +9,6 @@ class ConfigApp
       'publicarDenuncia' => 'DenunciaController#publicarDenuncia',
       'hacerDenunciaInfraganti' => 'DenunciaController#hacerDenunciaInfraganti',
       'publicarDenunciaInfraganti' => 'DenunciaController#publicarDenunciaInfraganti',
-      'test' => 'DenunciaController#testeoModel',
     ];
 
 }
