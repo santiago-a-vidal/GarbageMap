@@ -20,9 +20,6 @@
     </div>
     <div class="form-group">
     <input type="text" name="mail" value="mail@mail.com">
-    <div class="form-group">
-    <input name="estaCompletado" type="number" value="0">
-    </div>
     <button type="submit" class="btn btn-primary" id="submitDenuncia">Enviar</button>
 </form>
 </div>

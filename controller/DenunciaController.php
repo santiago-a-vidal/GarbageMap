@@ -25,7 +25,7 @@
             }
             $imagen = $this->postImagen();
             if($imagen){
-                $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], $_POST['estaCompletado'], $descripcion, $imagen);
+                $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], 0, $descripcion, $imagen, null);
                 $this->view->denunciaSubida($response,false);
                 die();
             }
@@ -62,6 +62,7 @@
                 return json_encode($respuesta);
                 die();
             }
+            $this->view->denunciaSubida(null, true);
             $respuesta['success'] = false;
             return json_encode($respuesta);
         }
@@ -170,6 +171,10 @@
                 $videoReturn = array('tipo' => $tipo[1], 'path' => $_FILES['video']['tmp_name']); //regresa un array con la extension y el path temporal del archivo
             }
             return $videoReturn;
+        }
+
+        function test(){
+            print_r($this->model->completarDenuncia(5));
         }
     }
 
