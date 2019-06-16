@@ -26,11 +26,15 @@
             $imagen = $this->postImagen();
             if($imagen){
                 $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], 0, $descripcion, $imagen, null);
+                
+                //llama a el feedback por mail
+                this->feedbackMail(array('mail' => $_POST['mail'], 'id_denuncia' => $response));
+
                 $this->view->denunciaSubida($response,false);
                 die();
             }
             $response = null;
-            $this->view->denunciaSubida($response,true);
+            $this->view->denunciaSubida($response, true);
         }
         //funcion para subir la imagen
         private function postImagen(){
@@ -157,6 +161,41 @@
                     "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
                 }
             }
+            $message .= "--{$mime_boundary}--";
+            $returnpath = "-f" . $from;
+            //envia el mail
+            mail($to, $subject, $message, $headers, $returnpath);
+        }
+
+        private function feedbackMail($denuncia){
+            //mail de denunciante
+            $to = $denuncia['mail'];
+            //envia el mail
+            $from = 'luchosan74@gmail.com';
+            $fromName = 'Sistema GarbageMap';
+            $id = $denuncia['id_denuncia'];
+            $subject = 'Denuncia GarbageMap'; 
+            
+            //cuerpo del mail
+            $htmlContent = "<div>
+            <h3>Denuncia Infraganti</h3>
+            <hr />
+            <dl class='row'>
+                <dt class = 'col-sm-2'>
+                    se ha recibido su denuncia correctamente, su numero de denuncia es:: 
+                </dt>
+                <dd class = 'col-sm-10'>
+                    $id
+                </dd>
+            </dl>
+            </div>";
+            
+            $headers = "From: $fromName"." <".$from.">";
+            $semi_rand = md5(time()); 
+            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
+            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
+            $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
+            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n"; 
             $message .= "--{$mime_boundary}--";
             $returnpath = "-f" . $from;
             //envia el mail
