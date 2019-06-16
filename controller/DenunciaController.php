@@ -172,10 +172,6 @@
             }
             return $videoReturn;
         }
-
-        function test(){
-            print_r($this->model->completarDenuncia(5));
-        }
     }
 
 
