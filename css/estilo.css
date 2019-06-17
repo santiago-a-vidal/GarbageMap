@@ -5,6 +5,11 @@ body{
   background-color: rgb(240, 240, 240);
   margin: 0;
 }
+.titulo{
+  text-align: center;
+  color: blue;
+}
+
 /* estilo de los div con class container*/
 .container {
   border-radius: 5px;
