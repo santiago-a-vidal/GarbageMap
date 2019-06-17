@@ -13,6 +13,8 @@ class ConfigApp
       'home' =>'Controller#mostrarHome',
       'Ciudadano'=>'Controller#mostrarMenu',
       'Capataz'=>'Controller#mostrarMenu',
+      'mapaBasura'=>'ControllerCapataz#mostrarMapaBasura',
+      'marcadores'=>'ControllerCapataz#getDenuncias',
 
     ];
 
