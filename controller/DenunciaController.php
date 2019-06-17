@@ -26,9 +26,9 @@
             $imagen = $this->postImagen();
             if($imagen){
                 $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], 0, $descripcion, $imagen, null);
-                
+
                 //llama a el feedback por mail
-                this->feedbackMail(array('mail' => $_POST['mail'], 'id_denuncia' => $response));
+                $this->feedbackMail(array('mail' => $_POST['mail'], 'id_denuncia' => $response));
 
                 $this->view->denunciaSubida($response,false);
                 die();
@@ -45,9 +45,9 @@
                 $imagenReturn = array('tipo' => $tipo[1], 'path' => $_FILES['imagen']['tmp_name']);
             }
             return $imagenReturn;
-            
+
         }
-        
+
         //denuncia infraganti
         //Muestra la vista para hacer la denuncia infraganti
         function hacerDenunciaInfraganti(){
@@ -85,18 +85,18 @@
             $patente = $denuncia['patente'];
             $ubicacion = $denuncia['latitud'].', '.$denuncia['longitud'];
             //asunto del mail
-            $subject = 'Denuncia infraganti N°'.$id; 
-            
+            $subject = 'Denuncia infraganti N°'.$id;
+
             //video a adjuntar
             $file = $denuncia['routeVideo'];
-            
+
             //cuerpo del mail
             $htmlContent = "<div>
             <h3>Denuncia Infraganti</h3>
             <hr />
             <dl class='row'>
                 <dt class = 'col-sm-2'>
-                    Numero de denuncia: 
+                    Numero de denuncia:
                 </dt>
                 <dd class = 'col-sm-10'>
                     $id
@@ -139,25 +139,25 @@
                 </dd>
             </dl>
             </div>";
-            
+
             $headers = "From: $fromName"." <".$from.">";
-            $semi_rand = md5(time()); 
-            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
-            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
+            $semi_rand = md5(time());
+            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";
             $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
-            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n"; 
+            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n";
             //adjunta el video
             if(!empty($file) > 0){
                 if(is_file($file)){
                     $message .= "--{$mime_boundary}\n";
                     $fp =    fopen($file,"rb");
                     $data =  fread($fp,filesize($file));
-            
+
                     fclose($fp);
                     $data = chunk_split(base64_encode($data));
-                    $message .= "Content-Type: application/octet-stream; name=\"".basename($file)."\"\n" . 
+                    $message .= "Content-Type: application/octet-stream; name=\"".basename($file)."\"\n" .
                     "Content-Description: ".basename($file)."\n" .
-                    "Content-Disposition: attachment;\n" . " filename=\"".basename($file)."\"; size=".filesize($file).";\n" . 
+                    "Content-Disposition: attachment;\n" . " filename=\"".basename($file)."\"; size=".filesize($file).";\n" .
                     "Content-Transfer-Encoding: base64\n\n" . $data . "\n\n";
                 }
             }
@@ -174,28 +174,28 @@
             $from = 'luchosan74@gmail.com';
             $fromName = 'Sistema GarbageMap';
             $id = $denuncia['id_denuncia'];
-            $subject = 'Denuncia GarbageMap'; 
-            
+            $subject = 'Denuncia GarbageMap';
+
             //cuerpo del mail
             $htmlContent = "<div>
             <h3>Denuncia Infraganti</h3>
             <hr />
             <dl class='row'>
                 <dt class = 'col-sm-2'>
-                    se ha recibido su denuncia correctamente, su numero de denuncia es:: 
+                    se ha recibido su denuncia correctamente, su numero de denuncia es::
                 </dt>
                 <dd class = 'col-sm-10'>
                     $id
                 </dd>
             </dl>
             </div>";
-            
+
             $headers = "From: $fromName"." <".$from.">";
-            $semi_rand = md5(time()); 
-            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
-            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\""; 
+            $semi_rand = md5(time());
+            $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+            $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . " boundary=\"{$mime_boundary}\"";
             $message = "--{$mime_boundary}\n" . "Content-Type: text/html; charset=\"UTF-8\"\n" .
-            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n"; 
+            "Content-Transfer-Encoding: 7bit\n\n" . $htmlContent . "\n\n";
             $message .= "--{$mime_boundary}--";
             $returnpath = "-f" . $from;
             //envia el mail
@@ -212,5 +212,3 @@
             return $videoReturn;
         }
     }
-
-
