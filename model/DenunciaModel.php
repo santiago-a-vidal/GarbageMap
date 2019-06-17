@@ -2,7 +2,7 @@
     require_once 'Model.php';
 
     class DenunciaModel extends Model{
-        
+
         function postDenuncia($latitud, $longitud, $mail, $estaCompletada, $descripcion = null, $imagen, $fecha_cumplimiento){
             $destino_final = 'images/' . uniqid() . '.'. $imagen['tipo'];
             move_uploaded_file($imagen['path'], $destino_final);
@@ -18,7 +18,8 @@
         function getDenunciasIncompletas(){
             $sentencia = $this->db->prepare("SELECT * FROM denuncia WHERE estaCompletada = 0");
             $sentencia->execute();
-            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+            $denuncias=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($denuncias);
         }
 
         function completarDenuncia($idDenuncia){
