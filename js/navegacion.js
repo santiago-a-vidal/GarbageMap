@@ -13,6 +13,25 @@ function cargarPagina(seccion){
   });
 };
 
+function cargarMenu(seccion){
+  $.ajax({
+    type: 'GET',
+    dataType: 'HTML',
+    url: seccion,
+    success: function(data){
+      $('#page').html(data);
+    },
+    error: function(){
+          alert('Error al Cargar la Pagina de ' + seccion);
+        }
+  });
+};
+$('#usuarioMenu').change(function () {
+  var seccion=$('#usuarioMenu').val();
+  cargarMenu(seccion);
+});
+
+
 $('#hd').on('click', function(event){
     event.preventDefault();
     cargarPagina("hacerDenuncia");
@@ -27,7 +46,7 @@ $('#hd').on('click', function(event){
       cargarPagina("home");
     });
 
-    function callPostAjax(dir, data) { 
+    function callPostAjax(dir, data) {
       $.ajax({
           "url" : dir,
           processData: false,
@@ -40,7 +59,7 @@ $('#hd').on('click', function(event){
    }
 
   function handleError(xmlhr, r, error) {
-      console.log(error); 
+      console.log(error);
   }
 
   function mostrarAlerta (data, textStatus, jqXHR) {
@@ -51,14 +70,14 @@ $('#hd').on('click', function(event){
       if (data.success){
         alertify.alert('Denuncia realizada', 'El numero de denuncia para su seguimiento es: '+data.id, function(){ alertify.success('Denuncia exitosa'); });
       }else{
-        alertify.error('No se pudo realizar la denuncia'); 
+        alertify.error('No se pudo realizar la denuncia');
       }
   }
 
   /*$('body').on("submit",'.form-infraganti', function (event) {
-      event.preventDefault();  
-      var form = new FormData($('.form-infraganti')[0]);  
-      let link = 'publicarDenunciaInfraganti';    
+      event.preventDefault();
+      var form = new FormData($('.form-infraganti')[0]);
+      let link = 'publicarDenunciaInfraganti';
       $('.btn-denunciar').attr("disabled",true);
       $('.btn-denunciar').html('<i class="fas fa-circle-notch fa-spin"></i>');
       callPostAjax(link, form);
