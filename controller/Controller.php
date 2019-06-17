@@ -10,10 +10,16 @@ function __construct() {
         $this->view = new View();
     }
 function mostrarIndex(){
-  $this->view->verIndex();
+  $secc="Ciudadano";
+  $this->view->verIndex($secc);
 }
 
 function mostrarHome(){
   $this->view->verHome();
 }
+function mostrarMenu(){
+  $secc=$_GET['action'];
+  $this->view->verIndex($secc);
+}
+
 }

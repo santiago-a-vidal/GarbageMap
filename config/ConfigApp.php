@@ -11,6 +11,9 @@ class ConfigApp
       'publicarDenunciaInfraganti' => 'DenunciaController#publicarDenunciaInfraganti',
       '' =>'Controller#mostrarIndex',
       'home' =>'Controller#mostrarHome',
+      'Ciudadano'=>'Controller#mostrarMenu',
+      'Capataz'=>'Controller#mostrarMenu',
+
     ];
 
 }

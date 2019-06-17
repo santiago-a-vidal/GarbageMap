@@ -6,7 +6,8 @@ class View {  // esta clase se corresponde a la vista del modelo MVC que control
   public function __construct(){
     $this->smarty_page = new Smarty;
   }
-  public function verIndex(){
+  public function verIndex($opc){
+      $this->smarty_page->assign('opcion',$opc);
       $this->smarty_page->display('index.tpl');
     }
 
