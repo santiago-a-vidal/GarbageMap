@@ -13,7 +13,8 @@ function __construct() {
     $this->view->mostraMapa();
   }
   function getDenuncias(){ //esta funcion le solicita al modelo las denuncias sin cumplir, las cuales seran marcadas en el mapa de la basura
-    $this->model->getDenunciasIncompletas();
+    $denuncias=$this->model->getDenunciasIncompletas();
+    echo json_encode($denuncias);//se devuelve el arreglo con las denuncias sin cumplir en forma de JSON
   }
 
 
