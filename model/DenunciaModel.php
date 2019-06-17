@@ -16,10 +16,10 @@
         }
 
         function getDenunciasIncompletas(){
-            $sentencia = $this->db->prepare("SELECT * FROM denuncia WHERE estaCompletada = 0");
+            $sentencia = $this->db->prepare("SELECT * FROM denuncia WHERE estaCompletada = 0"); // esta funcion toma de la base de datos todas las denuncias sin cumplir
             $sentencia->execute();
             $denuncias=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($denuncias);
+            echo json_encode($denuncias);//se devuelve el arreglo con las denuncias sin cumplir en forma de JSON
         }
 
         function completarDenuncia($idDenuncia){

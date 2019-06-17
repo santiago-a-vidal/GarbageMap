@@ -7,7 +7,7 @@ class CapatazView {
     $this->smarty = new Smarty;
   }
 
-  public function mostraMapa(){
+  public function mostraMapa(){ // muestra el div que contendra el mapa de la basura
     $this->smarty->display('mapaBasura.tpl');
   }
 

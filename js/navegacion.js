@@ -13,7 +13,7 @@ function cargarPagina(seccion){
   });
 };
 
-function cargarMenu(seccion){
+function cargarMenu(seccion){   // Carga asincronica del menu de usuario
   $.ajax({
     type: 'GET',
     dataType: 'HTML',
@@ -26,7 +26,7 @@ function cargarMenu(seccion){
         }
   });
 };
-$('#usuarioMenu').change(function () {
+$('#usuarioMenu').change(function () { //esta funcion evalua si el valor del selector de usuario cambia de valor, en caso de ser asi cambia al menu correspondiente
   var seccion=$('#usuarioMenu').val();
   cargarMenu(seccion);
 });
@@ -46,10 +46,10 @@ $('#hd').on('click', function(event){
       cargarPagina("home");
     });
 
-  $('#mb').on('click',function(event){
+  $('#mb').on('click',function(event){ // captura el evento click de la opcion del menu del capataz para activar la generacion del mapa de la basura
     event.preventDefault();
-    cargarPagina("mapaBasura");
-    callPostAjax("marcadores");
+    cargarPagina("mapaBasura"); //primero se carga el contenedor del mapa
+    callPostAjax("marcadores"); // despues se cargan los marcadores al mapa
   });
 
   function dibujarMapaconMarcadores(resultData) {
@@ -60,23 +60,23 @@ $('#hd').on('click', function(event){
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1Ijoic2VyZ2lvZ2FyY2lhcmV0ZWd1aSIsImEiOiJjanYwdXg1bmYxbXB6M3lzZG5xazYwZnd2In0.VQS4bmrDF7yKJqqALbcc5A' //esta clave de acceso se obtiene desde la pagina de Leaflet de manera gratuita
      }).addTo(mymap);
-    for (var i = 0; i < resultData.length; i++) {
+    for (var i = 0; i < resultData.length; i++) { // se recorre el arreglo de denuncias sin cumplir y por cada una se agrega un marcador con un pop up
       var marcador = L.marker([resultData[i].latitud, resultData[i].longitud]).addTo(mymap);
-      var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function() {
-      alert("hacer algo");
+      var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function() { // el pop up se mostrara al hacer click sobre el marcador
+      alert("hacer algo"); // aca deberia estar la llamada al metodo que dar por cumplida la tarea.
       })[0];
       marcador.bindPopup(link);
     }
   }
-    function callPostAjax(dir) {
+    function callPostAjax(dir) { // esta llamada solicita a la pagina las denuncias sin cumplir para agregar los marcadores al mapa.
       $.ajax({
           url : dir,
           method : "post",
           dataType :'json',
           contentType: "application/json; charset=utf-8",
-          success : function (resultData) {
+          success : function (resultData) { // resultData contiene el JSON con el arreglo de denuncias sin cumplir
            dibujarMapaconMarcadores(resultData);
-           console.log(resultData);
+           console.log(resultData); // se agrego esta linea para testeo del retorno de las denuncias sin cumplir
          },
           error: function(){
 
