@@ -46,17 +46,30 @@ $('#hd').on('click', function(event){
       cargarPagina("home");
     });
 
+    function cargarMapa(seccion){
+      $.ajax({
+        type: 'GET',
+        dataType: 'HTML',
+        url: seccion,
+        success: function(data){
+              $('#conten').html(data);
+              callPostAjax("marcadores"); // despues se cargan los marcadores al mapa
+            },
+        error: function(){
+              alert('Error al Cargar la Pagina de ' + seccion);
+            }
+      });
+    };
+
   $('#mb').on('click',function(event){ // captura el evento click de la opcion del menu del capataz para activar la generacion del mapa de la basura
     event.preventDefault();
-    cargarPagina("mapaBasura"); //primero se carga el contenedor del mapa
-    callPostAjax("marcadores"); // despues se cargan los marcadores al mapa
+    cargarMapa("mapaBasura"); //primero se carga el contenedor del mapa
   });
 
   function cargarCumplimiento(dir,id) {
     var dato={"data" : id};
     $.post(dir, dato, function (resultData) { // Llamada POST para dar por cumplida la denuncia id
-          cargarPagina("mapaBasura"); // vuelve a renderizar el mapa
-          callPostAjax("marcadores"); //actualiza los marcadores.
+          cargarMapa("mapaBasura"); // vuelve a renderizar el mapa
           alert("la denuncia "+id+" fue dada por cumplida");
 
      });
