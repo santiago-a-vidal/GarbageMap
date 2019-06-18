@@ -16,6 +16,11 @@ function __construct() {
     $denuncias=$this->model->getDenunciasIncompletas();
     echo json_encode($denuncias);//se devuelve el arreglo con las denuncias sin cumplir en forma de JSON
   }
+  function cumplirDenuncia(){
+   $id=(int)$_POST['data'];
+   $idRet=$this->model->completarDenuncia($id);
+   echo json_encode($idRet);
+  }
 
 
 }
