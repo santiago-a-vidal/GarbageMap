@@ -54,9 +54,9 @@ $('#hd').on('click', function(event){
 
   function cargarCumplimiento(dir,id) {
     var dato={"data" : id};
-    $.post(dir, dato, function (resultData) {
-          cargarPagina("mapaBasura");
-          callPostAjax("marcadores");
+    $.post(dir, dato, function (resultData) { // Llamada POST para dar por cumplida la denuncia id
+          cargarPagina("mapaBasura"); // vuelve a renderizar el mapa
+          callPostAjax("marcadores"); //actualiza los marcadores.
           alert("la denuncia "+id+" fue dada por cumplida");
 
      });
@@ -74,8 +74,8 @@ $('#hd').on('click', function(event){
       var marcador = L.marker([resultData[i].latitud, resultData[i].longitud]).addTo(mymap);
       var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function(e) {
       e.preventDefault();
-      cargarCumplimiento("cumplirDenuncia",$(this).attr("id"));
-      })[0];
+      cargarCumplimiento("cumplirDenuncia",$(this).attr("id")); //llamada a la funcion que implementa el cumplimiento de una denuncia, se activa al hacer click sobre
+    })[0];                                                    // un marcador correspondiente a una denuncia sin cumplir
       marcador.bindPopup(link);
     }
   }
