@@ -15,6 +15,8 @@ class ConfigApp
       'Capataz'=>'Controller#mostrarMenu',
       'mapaBasura'=>'ControllerCapataz#mostrarMapaBasura',
       'marcadores'=>'ControllerCapataz#getDenuncias',
+      'cumplirDenuncia'=>'ControllerCapataz#cumplirDenuncia'
+
 
     ];
 
