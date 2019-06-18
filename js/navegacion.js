@@ -70,8 +70,7 @@ $('#hd').on('click', function(event){
     var dato={"data" : id};
     $.post(dir, dato, function (resultData) { // Llamada POST para dar por cumplida la denuncia id
           cargarMapa("mapaBasura"); // vuelve a renderizar el mapa
-          alert("la denuncia "+id+" fue dada por cumplida");
-
+          alertify.success("La denuncia "+id+" fue dada por cumplida satisfactoriamente.");
      });
   }
 
