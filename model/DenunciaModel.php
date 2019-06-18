@@ -7,7 +7,7 @@
             $destino_final = 'images/' . uniqid() . '.'. $imagen['tipo'];
             move_uploaded_file($imagen['path'], $destino_final);
             $sentencia = $this->db->prepare("INSERT INTO denuncia(latitud, longitud, estaCompletada, descripcion, mail, routeImagen, fecha_cumplimiento) VALUES(?, ?, ?, ?, ?, ?, ?)");
-            if($sentencia->execute(array($latitud, $longitud, $estaCompletada, $descripcion, $mail, $destino_final, $fecha_cumplimiento))){
+            if($sentencia->execute([$latitud, $longitud, $estaCompletada, $descripcion, $mail, $destino_final, $fecha_cumplimiento])){
                 return $this->db->lastInsertId();
             }
             else{
