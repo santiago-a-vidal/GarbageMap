@@ -52,6 +52,16 @@ $('#hd').on('click', function(event){
     callPostAjax("marcadores"); // despues se cargan los marcadores al mapa
   });
 
+  function cargarCumplimiento(dir,id) {
+    var dato={"data" : id};
+    $.post(dir, dato, function (resultData) {
+          cargarPagina("mapaBasura");
+          callPostAjax("marcadores");
+          alert("la denuncia "+id+" fue dada por cumplida");
+
+     });
+  }
+
   function dibujarMapaconMarcadores(resultData) {
     var mymap = L.map('mapid').setView([-37.32,-59.1401387], 13); // esta variable es el mapa, en esta se define la coordenada en donde estara centrado el mapa y el zoom que se vera
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2VyZ2lvZ2FyY2lhcmV0ZWd1aSIsImEiOiJjanYwdXg1bmYxbXB6M3lzZG5xazYwZnd2In0.VQS4bmrDF7yKJqqALbcc5A', {
@@ -62,8 +72,9 @@ $('#hd').on('click', function(event){
      }).addTo(mymap);
     for (var i = 0; i < resultData.length; i++) { // se recorre el arreglo de denuncias sin cumplir y por cada una se agrega un marcador con un pop up
       var marcador = L.marker([resultData[i].latitud, resultData[i].longitud]).addTo(mymap);
-      var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function() { // el pop up se mostrara al hacer click sobre el marcador
-      alert("hacer algo"); // aca deberia estar la llamada al metodo que dar por cumplida la tarea.
+      var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function(e) {
+      e.preventDefault();
+      cargarCumplimiento("cumplirDenuncia",$(this).attr("id"));
       })[0];
       marcador.bindPopup(link);
     }
