@@ -31,4 +31,11 @@
             }
 
         }
+
+        function getDenuncia($id){
+            $sentencia = $this->db->prepare("SELECT mail, fecha_cumplimiento FROM denuncia WHERE id_denuncia=?");
+            $sentencia->execute([$id]);
+            return $sentencia->fetch(PDO::FETCH_ASSOC);
+        }
+
     }
