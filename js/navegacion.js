@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  alertify.set('notifier','position', 'top-center');
+
 function cargarPagina(seccion){
   $.ajax({
     type: 'GET',
