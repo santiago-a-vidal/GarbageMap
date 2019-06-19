@@ -18,9 +18,9 @@ function __construct() {
     echo json_encode($denuncias);//se devuelve el arreglo con las denuncias sin cumplir en forma de JSON
   }
   function cumplirDenuncia(){ // Esta funcion implementa el cumplimiento de una denuncia recibe el id de la misma por POST
-   $id=(int)$_POST['data'];
+   $id=$_POST['data'];
    $idRet=$this->model->completarDenuncia($id); // se pasa al id al modelo para que registre el cambio.
-   if ($idRet!=-1)
+   if($idRet!=-1)
     $this->enviarMailCumplimiento($idRet);
    die();
    echo json_encode($idRet); //retorna un JSON con el id de la denuncia cumplida o -1 en caso de no poder registrar el cumplimiento

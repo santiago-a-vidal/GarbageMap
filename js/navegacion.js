@@ -69,6 +69,7 @@ $('#hd').on('click', function(event){
   });
 
   function cargarCumplimiento(dir,id) {
+    console.log(id);
     var dato={"data" : id};
     $.post(dir, dato, function (resultData) { // Llamada POST para dar por cumplida la denuncia id
           cargarMapa("mapaBasura"); // vuelve a renderizar el mapa
@@ -147,6 +148,7 @@ $('#hd').on('click', function(event){
   $('body').on("submit",'#add_denuncia', function (event) {
     event.preventDefault();
     var form = new FormData($('#add_denuncia')[0]);
+    console.log($('#add_denuncia')[0]);
     let link = 'publicarDenuncia';
     $('.btn-denunciar').attr("disabled",true);
     $('.btn-denunciar').html('<i class="fas fa-circle-notch fa-spin"></i>');
@@ -154,6 +156,7 @@ $('#hd').on('click', function(event){
       "url" : link,
       processData: false,
       contentType: false,
+      async: false,
       "method" : "POST",
       "data" : form,
       "success" : mostrarAlerta,
