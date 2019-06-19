@@ -86,11 +86,13 @@ $('#hd').on('click', function(event){
      }).addTo(mymap);
     for (var i = 0; i < resultData.length; i++) { // se recorre el arreglo de denuncias sin cumplir y por cada una se agrega un marcador con un pop up
       var marcador = L.marker([resultData[i].latitud, resultData[i].longitud]).addTo(mymap);
-      var link = $('<a href="#" id='+resultData[i].id_denuncia+' class="speciallink">Informar Cumplimiento</a>').click(function(e) {
-      e.preventDefault();
-      cargarCumplimiento("cumplirDenuncia",$(this).attr("id")); //llamada a la funcion que implementa el cumplimiento de una denuncia, se activa al hacer click sobre
-    })[0];                                                    // un marcador correspondiente a una denuncia sin cumplir
-      marcador.bindPopup(link);
+      var container=$('<div />');
+      container.on('click','.speciallink',function(e) {
+        e.preventDefault();
+        cargarCumplimiento("cumplirDenuncia",$(this).attr("id")); //llamada a la funcion que implementa el cumplimiento de una denuncia, se activa al hacer click sobre
+      });                                                          // un marcador correspondiente a una denuncia sin cumplir
+      container.html('<p>Denuncia N°'+resultData[i].id_denuncia+'</p><p>Correo denunciante: '+resultData[i].mail+'</p><img src="'+resultData[i].routeImagen+'"width="100px"/><br/><a href="#" id="'+resultData[i].id_denuncia+'" class="speciallink">Informar Cumplimiento</a>');
+      marcador.bindPopup(container[0]);
     }
   }
     function callPostAjax(dir) { // esta llamada solicita a la pagina las denuncias sin cumplir para agregar los marcadores al mapa.
