@@ -29,16 +29,18 @@
             if($imagen){
                 $response = $this->model->postDenuncia((float)$_POST['latitud'], (float)$_POST['longitud'], $_POST['mail'], 0, $descripcion, $imagen, null);
                 //llama a el feedback por mail
+                $respuesta['success'] = true;
+                $respuesta['id'] = $response;
                 if ($response==-1){
-                    $this->view->denunciaSubida($response,true);
+                    $respuesta['success'] = false;
                 }else{
-                    $this->feedbackMail($response);
-                    $this->view->denunciaSubida($response,false);    
+                    $respuesta['success'] = true;
+                    $respuesta['id'] = $response;
                 }
-                die();
+                return json_encode($respuesta);
             }
-            $response = null;
-            $this->view->denunciaSubida($response, true);
+            $respuesta['success'] = false;
+            return json_encode($respuesta);
         }
         private function feedbackMail($id_denuncia){
             $mail = new Mail();

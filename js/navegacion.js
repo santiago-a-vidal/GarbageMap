@@ -144,4 +144,20 @@ $('#hd').on('click', function(event){
       });
   });
 
+  $('body').on("submit",'#add_denuncia', function (event) {
+    event.preventDefault();
+    var form = new FormData($('#add_denuncia')[0]);
+    let link = 'publicarDenuncia';
+    $('.btn-denunciar').attr("disabled",true);
+    $('.btn-denunciar').html('<i class="fas fa-circle-notch fa-spin"></i>');
+    $.ajax({
+      "url" : link,
+      processData: false,
+      contentType: false,
+      "method" : "POST",
+      "data" : form,
+      "success" : mostrarAlerta,
+      "error": handleError
+      });
+    });
 });

@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
     <input type="text" name="mail" value="mail@mail.com">
-    <button type="submit" class="btn btn-primary" id="submitDenuncia">Enviar</button>
+    <button type="submit" class="btn btn-primary btn-denunciar" id="submitDenuncia">Denunciar</button>
 </form>
 </div>
 <script src="js/jquery-3.0.0.min.js" charset="utf-8"></script> <!-- Llamado a la biblioteca javascript de bootstrap-->
