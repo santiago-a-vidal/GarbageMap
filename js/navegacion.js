@@ -138,6 +138,7 @@ $('#hd').on('click', function(event){
         "url" : link,
         processData: false,
         contentType: false,
+        async: false,
         "method" : "POST",
         "data" : form,
         "success" : mostrarAlerta,
